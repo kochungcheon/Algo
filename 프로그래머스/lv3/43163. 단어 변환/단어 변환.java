@@ -4,7 +4,7 @@ class Solution {
     static boolean[] visit;
     static int N;
     static int ans = Integer.MAX_VALUE;
-    
+
     static void DFS(int now, int count, String[] words, String target){
         if (target.equals(words[now])){
             ans = Math.min(ans, count);
@@ -43,13 +43,13 @@ class Solution {
                 if (isSimilar(wordList.get(i), wordList.get(j))){
                     graph[i].add(j);
                 }
-                
+
             }
         }
         for (int i=0; i<N; i++){
             System.out.print(graph[i] + " ");
         } System.out.println();
-        
+
         DFS(0, 0, wordList.toArray(new String[0]), target);
         return ans == Integer.MAX_VALUE ? 0 : ans;
     }
