@@ -3,10 +3,7 @@ import java.lang.*;
 class Solution {
     public int solution(int n, int k) {
         int answer = 0;
-        String tmp = zinsu(n, k);
-        String[] lst = tmp.split("0");
-        System.out.println(tmp);
-        System.out.println(Arrays.toString(lst));
+        String[] lst = zinsu(n, k).split("0");
         for (int i =0; i<lst.length; i++){
             if (lst[i].equals("")) continue;
             if (isSosu(Long.parseLong(lst[i]))){
