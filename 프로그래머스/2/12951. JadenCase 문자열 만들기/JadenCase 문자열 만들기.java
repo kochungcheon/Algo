@@ -1,30 +1,14 @@
+import java.util.*;
 class Solution {
     public String solution(String s) {
         String answer = "";
+        String[] s_arr = s.toLowerCase().split("");
+        System.out.println(Arrays.toString(s_arr));
         boolean flag = true;
-        for (int i=0; i<s.length(); i++){
-            String c = Character.toString(s.charAt(i));
-            char cc = s.charAt(i);
-            System.out.println(c);
-            if (c.equals(" ")){
-                flag = true;
-                answer += " ";
-                continue;
-            }
-            if (flag){
-                if (cc >= 'a' && 'z' >= cc){
-                    answer += c.toUpperCase();
-                } else{
-                    answer += c;
-                }
-                flag = false;
-            } else {
-                if (cc >= 'A' && 'Z' >= cc){
-                    answer += c.toLowerCase();
-                } else{
-                    answer += c;    
-                }
-            }
+        for (String s_val : s_arr){
+            answer += flag ? s_val.toUpperCase() : s_val;
+            System.out.println(s_val.toUpperCase());
+            flag = s_val.equals(" ") ? true : false;
         }
         return answer;
     }
