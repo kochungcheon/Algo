@@ -1,26 +1,33 @@
 import java.util.*;
 class Solution {
- public int solution(String s) {
-        int ans = s.length();
-        for (int i = 1; i <= s.length() / 2; i++) {
-            int len = 0;
-            for(int j = 0; j + i <= s.length();){
-                int h = j + i;
-                int cnt = 1;
-                String seg = s.substring(j, j + i);
+    static int solution(String s) {
+        int len = s.length();
+        int answer = len;
 
-                while(h + i <= s.length() && seg.equals(s.substring(h, h + i))){
-                    h += i;
-                    cnt ++;
-                } 
-                if(cnt == 1) len += i;
-                else len += i + String.valueOf(cnt).length();  
+        for (int num = 1; num <= len / 2; num++) {
+            StringBuilder compressed = new StringBuilder();
+            String prev = s.substring(0, num);
+            int count = 1;
 
-                j = h;
+            for (int i = num; i < len; i += num) {
+                // 다음 부분 문자열을 가져옴
+                String next = i + num > len ? s.substring(i) : s.substring(i, i + num);
+
+                if (prev.equals(next)) {
+                    count++;
+                } else {
+                    compressed.append(count > 1 ? count : "").append(prev);
+                    prev = next;
+                    count = 1;
+                }
             }
-            if(s.length() % i != 0) len += s.length() % i; 
-            ans = Math.min(ans, len);
+
+            // 마지막 부분 처리
+            compressed.append(count > 1 ? count : "").append(prev);
+
+            // 최소 길이 업데이트
+            answer = Math.min(answer, compressed.length());
         }
-        return ans;
+        return answer;
     }
 }
