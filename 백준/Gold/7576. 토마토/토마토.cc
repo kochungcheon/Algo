@@ -52,8 +52,7 @@ int main() {
     cin.tie(NULL);
     cin >> m >> n;
 
-    bool all_ripe = true;
-
+    bool flag = true;
     for (int x = 0; x < n; x++) {
         for (int y = 0; y < m; y++) {
             cin >> maze[x][y];
@@ -62,12 +61,12 @@ int main() {
                 visit[x][y] = true;
             }
             if (maze[x][y] == 0) {
-                all_ripe = false; 
+                flag = false; 
             }
         }
     }
 
-    if(all_ripe) {
+    if(flag) {
         cout << 0;
         return 0;
     }
