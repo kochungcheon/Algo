@@ -30,7 +30,7 @@ bool canvisit(C node) {
 
 
 int bfs() {
-    int last_day = 0;
+    int cnt = 0;
     while (!q.empty()) {
         C cur = q.front();
         q.pop();
@@ -39,12 +39,12 @@ int bfs() {
             if (canvisit(next)) {
                 visit[next.x][next.y] = true;
                 maze[next.x][next.y] = maze[cur.x][cur.y] + 1;
-                last_day = max(last_day, maze[next.x][next.y]);
+                cnt = max(cnt, maze[next.x][next.y]);
                 q.push(next);
             }
         }
     }
-    return last_day - 1; 
+    return cnt; 
 }
 
 int main() {
@@ -83,6 +83,6 @@ int main() {
         }
     }
 
-    cout << ans;
+    cout << ans - 1;
     return 0;
 }
