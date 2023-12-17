@@ -19,11 +19,15 @@ bool canvisit(C node) {
     if (node.x < 0 || node.y < 0 || node.x >= n || node.y >= m) {
         return false;
     }
-    if (maze[node.x][node.y] != 0 || visit[node.x][node.y]) {
+    if (maze[node.x][node.y] != 0) {
+        return false;
+    }
+    if (visit[node.x][node.y]) {
         return false;
     }
     return true;
 }
+
 
 int bfs() {
     int last_day = 0;
