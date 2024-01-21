@@ -1,10 +1,23 @@
 import java.util.*;
-
 class Solution {
-    static Set<Set<String>> set = new HashSet<>();
-    static String[] banned_id;
-    static List<Set<String>> bannedMatch;
-
+    static List<Set<String>> bannedMatched = new ArrayList<>();
+    static String[] bans;
+    static Set<Set<String>> set= new HashSet<>();
+    
+    void dfs(int idx, Set<String> ban) {
+        if (idx == bans.length) {
+            set.add(new HashSet<>(ban));
+            return;
+        }
+        
+        for (String b : bannedMatched.get(idx)) {
+            if (ban.contains(b)) continue;
+            ban.add(b);
+            dfs(idx+1, ban);
+            ban.remove(b);
+        }
+    }
+    
     boolean match(String user, String banned) {
         if (user.length() != banned.length()) return false;
         for (int i = 0; i < user.length(); i++) {
@@ -13,38 +26,22 @@ class Solution {
         }
         return true;
     }
-
-    void dfs(int index, Set<String> bannedUsers) {
-        if (index == banned_id.length) {
-            set.add(new HashSet<>(bannedUsers));
-            return;
-        }
-
-        for (String user : bannedMatch.get(index)) {
-            if (bannedUsers.contains(user)) continue;
-
-            bannedUsers.add(user);
-            dfs(index + 1, bannedUsers);
-            bannedUsers.remove(user);
-        }
-    }
-
-    public int solution(String[] users, String[] banned) {
-        banned_id = banned;
-
-        bannedMatch = new ArrayList<>();
-        for (int i = 0; i < banned_id.length; i++) {
+    
+    public int solution(String[] user_id, String[] banned_id) {
+        int answer = 0;
+        bans = banned_id;
+        for (String ban : banned_id) {
             Set<String> matches = new HashSet<>();
-            for (String user : users) {
-                if (match(user, banned_id[i])) {
+            for (String user : user_id) {
+                if (match(user, ban)) {
                     matches.add(user);
                 }
             }
-            bannedMatch.add(matches);
+            bannedMatched.add(matches);
         }
-
+        
         dfs(0, new HashSet<>());
-
+        
         return set.size();
     }
 }
