@@ -21,7 +21,7 @@ class Solution {
             ArrayList<String> tmp = new ArrayList<>(arr);
             for (int i=0; i<3; i++) {
                 String now = String.valueOf(oper.charAt(i));
-                for (int j=1; j<tmp.size(); j+=2) { // Here, use tmp instead of arr
+                for (int j=1; j<tmp.size(); j+=2) {
                     String com = tmp.get(j);
                     
                     if (!now.equals(com)) continue;
