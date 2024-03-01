@@ -35,6 +35,10 @@ public class Main {
             int y = Integer.parseInt(st.nextToken()) - 1;
             String dir = st.nextToken();
 
+            st = new StringTokenizer(br.readLine());
+            int dx = Integer.parseInt(st.nextToken()) - 1;
+            int dy = Integer.parseInt(st.nextToken()) - 1;
+
             boolean canAttack = true;
 
             // 쓰러지지 않은 것만 공격 할 수 있다
@@ -97,9 +101,9 @@ public class Main {
                 else if (dir.equals("N")) {
                     int min = Math.max(0, x-(original[x][y]-1));
                     for (int j=x; j>=min; j--) {
-                        cnt++;
                         // 얼만큼 넘어트릴지 계산한다
                         if (ans[j][y].equals("S")) {
+                            cnt++;
                             int tmpMin = Math.max(0, j-(original[j][y]-1));
                             min = Math.min(tmpMin, min);
 
@@ -111,16 +115,13 @@ public class Main {
             }
 
             // 수비
-            st = new StringTokenizer(br.readLine());
-            x = Integer.parseInt(st.nextToken()) - 1;
-            y = Integer.parseInt(st.nextToken()) - 1;
             // 넘어졌으면 세운다
-            if (ans[x][y].equals("F")) {
-                ans[x][y] = "S";
+            if (ans[dx][dy].equals("F")) {
+                ans[dx][dy] = "S";
             }
         }
-        
-        
+
+
 
         System.out.println(cnt);
         for (int i=0; i<N; i++) {
