@@ -21,8 +21,6 @@ public class Main {
             people.add(now);
         }
 
-        Collections.sort(people);
-
         int cnt = 0;
 
         for (int p : people) {
