@@ -10,21 +10,23 @@ public class Main {
         int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
 
-
-        int[] people = new int[N];
+        Set<Integer> set = new HashSet<>();
+        List<Integer> people = new ArrayList<>();
         boolean[] boom = new boolean[M+1];
 
         for (int i=0; i<N; i++) {
-            people[i] = Integer.parseInt(br.readLine());
+            int now = Integer.parseInt(br.readLine());
+            if (set.contains(now)) continue;
+            set.add(now);
+            people.add(now);
         }
 
-        Arrays.sort(people);
+        Collections.sort(people);
 
         int cnt = 0;
 
-        for (int i=0; i<N; i++) {
-            int now = people[i];
-            for (int j=now; j<=M; j+=now) {
+        for (int p : people) {
+            for (int j=p; j<=M; j+=p) {
                 if (boom[j]) continue;
                 boom[j] = true;
                 cnt++;
