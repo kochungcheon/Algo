@@ -38,8 +38,10 @@ public class Main {
 
 		Arrays.sort(A);
 
+		StringBuilder sb = new StringBuilder();
 		for (int i=0; i<M; i++) {
-			System.out.println(find(Integer.parseInt(br.readLine())));
+			sb.append(find(Integer.parseInt(br.readLine()))).append('\n');
 		}
+		System.out.println(sb);
 	}
 }
