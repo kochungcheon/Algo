@@ -32,8 +32,10 @@ public class Main {
 		}
 		Collections.sort(ans);
 		System.out.println(ans.size());
+		StringBuilder sb = new StringBuilder();
 		for (String s : ans) {
-			System.out.println(s);
+			sb.append(s).append('\n');
 		}
+		System.out.println(sb);
 	}
 }
