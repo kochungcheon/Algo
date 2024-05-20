@@ -15,7 +15,7 @@ public class Main {
 		ans = 0;
 
 		arr = new int[25];
-		visit = new int[25];
+		visit = new int[N+1];
 
 		arr[X] = arr[Y] = Y - X - 1;
 		visit[Y-X-1] = 1;
@@ -24,7 +24,7 @@ public class Main {
 	}
 
 	private static void check(int cur) {
-		if (cur == N*2+1) {
+		if (cur == N*2) {
 			ans++;
 			return;
 		}
