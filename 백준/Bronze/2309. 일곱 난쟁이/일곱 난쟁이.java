@@ -25,7 +25,7 @@ public class Main {
             }
         }
         
-        ArrayList<Integer> result = new ArrayList<>(map.keySet());
+        List<Integer> result = new ArrayList<>(map.keySet());
         Collections.sort(result);
         for(int height : result){
             System.out.println(height);
