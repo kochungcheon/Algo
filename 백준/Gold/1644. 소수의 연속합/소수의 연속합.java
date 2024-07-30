@@ -29,7 +29,7 @@ public class Main {
 
 		int sum = 0;
 		int ans = 0;
-		while (e >= s && e < prime.size()) {
+		while (e < prime.size()) {
 			sum += prime.get(e++);
 			if (sum == target) {
 				++ans;
