@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.StringTokenizer;
-import java.util.TreeMap;
+import java.util.HashMap;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -24,7 +24,7 @@ public class Main {
 		}
 
 		long ans = 0L;
-		Map<Integer, Long> map = new TreeMap<>();
+		Map<Integer, Long> map = new HashMap<>();
 		for (int i=0; i<=N; i++) {
 			ans += map.getOrDefault(prefix[i] - K, 0L);
 			map.put(prefix[i], map.getOrDefault(prefix[i], 0L)+1);
