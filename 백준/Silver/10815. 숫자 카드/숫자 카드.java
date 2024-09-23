@@ -28,8 +28,10 @@ public class Main {
         M = Integer.parseInt(br.readLine());
         B = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
         Arrays.sort(A);
+        StringBuilder sb = new StringBuilder();
         for (int b : B) {
-            System.out.print(find(b) + " ");
+            sb.append(find(b)).append(" ");
         }
+        System.out.print(sb);
     }
 }
