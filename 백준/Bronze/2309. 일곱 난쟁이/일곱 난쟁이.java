@@ -1,41 +1,34 @@
-
-
 import java.util.*;
-import java.io.*;
+
 public class Main {
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int num = 9;
-		int[] arr = new int[num];
-		int total = 0;
-		for (int i=0; i<num; i++) {
-			arr[i] = Integer.parseInt(br.readLine());
-			total += arr[i];
-		}
-
-		Arrays.sort(arr);
-
-
-
-		boolean flag = false;
-
-		for (int i=0; i<num-1; i++) {
-			if (flag) {
-				break;
-			}
-			for (int j=i+1; j<num; j++) {
-				if (flag) {
-					break;
-				}
-				if (total - arr[i] - arr[j] == 100) {
-					flag = true;
-					for (int ans=0; ans < num; ans++) {
-						if (ans != i && ans != j) {
-							System.out.println(arr[ans]);
-						}
-					}
-				}
-			}
-		}
-	}
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int[] dwarfs = new int[9];
+        int sum = 0;
+        Map<Integer, Integer> map = new HashMap<>();
+        
+        for(int i=0; i<9; i++) {
+            dwarfs[i] = sc.nextInt();
+            sum += dwarfs[i];
+            map.put(dwarfs[i], i);
+        }
+        
+        int diff = sum - 100;
+        
+        outerloop:
+        for(int i=0; i<9; i++) {
+            int target = diff - dwarfs[i];
+            if(map.containsKey(target) && map.get(target) != i) {
+                map.remove(dwarfs[i]);
+                map.remove(target);
+                break outerloop;
+            }
+        }
+        
+        List<Integer> result = new ArrayList<>(map.keySet());
+        Collections.sort(result);
+        for(int height : result){
+            System.out.println(height);
+        }        
+    }
 }
