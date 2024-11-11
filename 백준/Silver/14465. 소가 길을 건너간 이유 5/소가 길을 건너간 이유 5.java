@@ -1,40 +1,36 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.StringTokenizer;
+import java.util.*;
+import java.io.*;
 
 public class Main {
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st = new StringTokenizer(br.readLine());
-		int N = Integer.parseInt(st.nextToken());
-		int K = Integer.parseInt(st.nextToken());
-		int B = Integer.parseInt(st.nextToken());
+    public static void main(String[] args) throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-		int[] arr = new int[N + 1];
-		for (int i=0; i<B; i++) {
-			arr[Integer.parseInt(br.readLine()) - 1] = 1;
-		}
+        int N = Integer.parseInt(st.nextToken());
+        int K = Integer.parseInt(st.nextToken());
+        int B = Integer.parseInt(st.nextToken());
 
-		int s = 0;
-		int e = 0;
+        boolean[] isBroken = new boolean[N + 1];
+        for (int i=0; i<B; i++) {
+            isBroken[Integer.parseInt(br.readLine())] = true;
+        }
 
-		int ans = Integer.MAX_VALUE;
-		int tmp = arr[e] == 1 ? 1 : 0;
+        int cnt = 0;
+        int ans = Integer.MAX_VALUE;
 
-		while (s <= e && e < N) {
-			int len = (e + 1) - s;
-			if (len == K) {
-				ans = Math.min(tmp, ans);
-				if (arr[s++] == 1) {
-					tmp--;
-				}
-			}
-			if (arr[++e] == 1) {
-				tmp++;
-			}
-		}
-		System.out.print(ans);
-	}
+        // 초기 값 세팅
+        for (int i=0; i<=K; i++) {
+            cnt += isBroken[i] ? 1 : 0;
+        }
+        ans = Math.min(ans, cnt);
+
+        for (int i=K+1; i<=N; i++) {
+            cnt += isBroken[i] ? 1 : 0;
+            cnt -= isBroken[i-K] ? 1 : 0;
+            ans = Math.min(ans, cnt);
+        }
+
+        // 결과 출력
+        System.out.print(ans);
+    }
 }
