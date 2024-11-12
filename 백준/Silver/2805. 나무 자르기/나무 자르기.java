@@ -1,32 +1,34 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.StringTokenizer;
+
 public class Main {
-    static int N;
-    static int M;
+    static int N, M;
     static int[] arr;
-    static boolean check(int x) {
-        long sum = 0;
-        for (int a : arr) {
-            if (a > x) {
-                sum += a - x;
-                if (sum >= M) return true;
-            }
+    static boolean check(int target) {
+        long tmp = 0;
+        for (int tree : arr) {
+            if (tree <= target) continue;
+            tmp += tree - target;
         }
-        return sum >= M;
+        return tmp >= M;
     }
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
+
         arr = Arrays.stream(br.readLine().split(" ")).mapToInt(Integer::parseInt).toArray();
 
         int s = 0;
-        int e = 1_000_000_000;
-        int ans = 0;
+        int e = 2_000_000_000;
 
+        int ans = 0;
         while (e >= s) {
-            int mid = s + (e - s)/ 2;
+            int mid = (e - s) / 2 + s;
             if (check(mid)) {
                 ans = Math.max(ans, mid);
                 s = mid + 1;
@@ -34,7 +36,7 @@ public class Main {
                 e = mid - 1;
             }
         }
-        System.out.print(ans);
 
+        System.out.print(ans);
     }
 }
