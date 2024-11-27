@@ -21,16 +21,13 @@ public class Main {
                 cnt++;
             }
 
-            if (cnt > N) {
-                while (cnt > N) {
-                    int tmp = str.charAt(s++) - 'a';
-                    arr[tmp]--;
-                    if (arr[tmp] == 0) {
-                        cnt--;
-                    }
+            while (cnt > N) {
+                int tmp = str.charAt(s++) - 'a';
+                arr[tmp]--;
+                if (arr[tmp] == 0) {
+                    cnt--;
                 }
             }
-
             ans = Math.max(ans, e - s);
         }
 
