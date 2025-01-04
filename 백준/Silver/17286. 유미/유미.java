@@ -32,10 +32,10 @@ public class Main {
             }
         }
 
-        double ans = 1000.0;
+        float ans = 1000.0f;
         for (int[] route : routes) {
             Pair start = arr.get(0);
-            double tmp = 0.0;
+            float tmp = 0.0f;
             for (int r : route) {
                 Pair enc = arr.get(r);
                 tmp += Math.sqrt((start.x - enc.x) * (start.x - enc.x) + (start.y - enc.y) * (start.y - enc.y));
