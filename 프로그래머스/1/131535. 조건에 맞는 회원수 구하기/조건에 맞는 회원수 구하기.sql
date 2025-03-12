@@ -1,4 +1,3 @@
--- 코드를 입력하세요
-SELECT COUNT(USER_ID) AS USERS
-FROM USER_INFO 
-WHERE AGE >= 20 AND AGE <= 29 AND JOINED LIKE '2021%'
+select COUNT(*) as USERS
+from USER_INFO
+where JOINED like '2021%' and AGE >= 20 and AGE <= 29
