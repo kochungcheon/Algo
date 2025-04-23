@@ -26,7 +26,6 @@ public class Main {
 
 			now = next;
 			len--;
-			next = new int[len];
 		}
 
 		System.out.print("" + now[0] + now[1]);
