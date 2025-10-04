@@ -1,33 +1,37 @@
 import java.util.*;
+import java.io.*;
+
 class Solution {
-    static int solution(String s) {
-        int len = s.length();
+    public int solution(String s) {
+        int len = s.length(); // 빠르게가 아니라 바르게? 
+        if (len == 1) return 1;
+        
         int answer = len;
-
-        for (int num = 1; num <= len / 2; num++) {
-            StringBuilder compressed = new StringBuilder();
-            String prev = s.substring(0, num);
-            int count = 1;
-
-            for (int i = num; i < len; i += num) {
-                // 다음 부분 문자열을 가져옴
-                String next = i + num > len ? s.substring(i) : s.substring(i, i + num);
-
-                if (prev.equals(next)) {
-                    count++;
-                } else {
-                    compressed.append(count > 1 ? count : "").append(prev);
-                    prev = next;
-                    count = 1;
-                }
-            }
-
-            // 마지막 부분 처리
-            compressed.append(count > 1 ? count : "").append(prev);
-
-            // 최소 길이 업데이트
-            answer = Math.min(answer, compressed.length());
+        for (int k = 1; k <= len/2; k++) {
+            int n = compress(s, k);
+            if (n < answer) answer = n;
         }
         return answer;
+    }
+    public int compress(String s, int k) {
+        int len = s.length();
+        StringBuilder sb = new StringBuilder();
+        String prev = s.substring(0, k);
+        int cnt = 1;
+        for (int i=k; i<len; i+=k) {
+            int end = Math.min(i+k, len);
+            String curr = s.substring(i, end);
+            if (prev.equals(curr)) {
+                cnt++;
+            } else {
+                if (cnt > 1) sb.append(cnt);
+                sb.append(prev);
+                prev = curr;
+                cnt = 1;
+            }
+        }
+        if (cnt > 1) sb.append(cnt);
+        sb.append(prev);
+        return sb.length();
     }
 }
