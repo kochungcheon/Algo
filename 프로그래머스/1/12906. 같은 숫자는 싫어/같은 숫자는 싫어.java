@@ -2,10 +2,19 @@ import java.util.*;
 
 public class Solution {
     public int[] solution(int []arr) {
-        int[] answer = {};
+    
+        Deque<Integer> stack = new ArrayDeque<>();
+        for (int a : arr) {
+            if (stack.isEmpty() || stack.peekLast() != a) {
+                stack.addLast(a);
+            }
+        }
         
-        // [실행] 버튼을 누르면 출력 값을 볼 수 있습니다.
-        System.out.println("Hello Java");
+        int len = stack.size();
+        int[] answer = new int[len];
+        for (int i=0; i<len; i++) {
+            answer[i] = stack.pollFirst();
+        }
 
         return answer;
     }
