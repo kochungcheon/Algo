@@ -1,16 +1,16 @@
 import java.util.*;
-import java.io.*;
 
 class Solution {
     public String solution(String s) {
-        String[] slt = s.split(" ");
-        ArrayList<Integer> arr = new ArrayList<>();
-        for (String ss : slt) {
-            Integer a = Integer.parseInt(ss);
-            arr.add(a);
+        String[] sArr = s.split(" ");
+        int min = Integer.parseInt(sArr[0]);
+        int max = Integer.parseInt(sArr[0]);
+        
+        for (String sa : sArr) {
+            min = Math.min(min, Integer.parseInt(sa));
+            max = Math.max(max, Integer.parseInt(sa));
         }
-        Collections.sort(arr);
-        String answer = arr.get(0) + " " + arr.get(arr.size() - 1);
+        String answer = String.valueOf(min) + " "+ String.valueOf(max);
         return answer;
     }
 }
