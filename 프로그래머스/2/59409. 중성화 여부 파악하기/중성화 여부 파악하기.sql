@@ -1,8 +1,9 @@
 -- 코드를 입력하세요
-select ANIMAL_ID, NAME, 
-    case 
-        when SEX_UPON_INTAKE like '%Neutered%' then 'O'
-        when SEX_UPON_INTAKE like '%Spayed%' then 'O'
-        else 'X'
-    end as '중성화'
-from ANIMAL_INS
+SELECT ANIMAL_ID, NAME, 
+    CASE WHEN SEX_UPON_INTAKE 
+        like '%Neutered%' 
+        OR  SEX_UPON_INTAKE like '%Spayed%' 
+            Then 'O'
+        ELSE 'X'
+    END as '중성화'
+FROM ANIMAL_INS
