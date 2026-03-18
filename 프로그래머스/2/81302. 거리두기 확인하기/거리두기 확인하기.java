@@ -1,74 +1,61 @@
 import java.util.*;
-import java.lang.*;
+
 class Solution {
+    static int[] dx = new int[]{1, -1, 0, 0};
+    static int[] dy = new int[]{0, 0, 1, -1};
+    static boolean[][] visit;
     static class Pair {
         int x;
         int y;
-        int step;
-        public Pair(int x, int y, int step) {
+        int dist;
+        public Pair(int x, int y, int dist) {
             this.x = x;
             this.y = y;
-            this.step = step;
+            this.dist = dist;
         }
     }
     static boolean canGo(int x, int y) {
         return 0 <= x && x < 5 && 0 <= y && y < 5;
     }
-    static Integer BFS(int x, int y, String[] places) {
-        int[] dx = {1, -1, 0, 0};
-        int[] dy = {0, 0, 1, -1};
-        Queue<Pair> q = new LinkedList<>();
-        boolean[][] visit = new boolean[5][5];
+    static boolean BFS(int x, int y, String[] room) {         
         visit[x][y] = true;
-        q.add(new Pair(x, y, 0));
-        while (!q.isEmpty()) {
-            Pair now = q.poll();
-            for (int i=0; i<4; i++) {
-                int nx = now.x + dx[i];
-                int ny = now.y + dy[i];
-                int nstep = now.step + 1;
-                if (nstep >= 3) {
-                    continue;
-                }
-                if (canGo(nx, ny)) {
-                    if (visit[nx][ny]) continue;
-                    visit[nx][ny] = true;
-                    // 파티션 만났을 때 종료
-                    if (places[nx].charAt(ny)=='X') {
-                        continue;
-                    }
-
-                    // 빈 테이블 만났을 때
-                    if (places[nx].charAt(ny)=='O') {
-                        q.add(new Pair(nx, ny, nstep));
-                        
-                    } 
-                    // 다른 응시자 만났을 때
-                    else {
-                        if (now.step <= 2) { 
-                            return 0;
-                        }
-                    }
-                }
-            }
+        Queue<Pair> queue = new LinkedList<>();
+        queue.add(new Pair(x, y, 0));
+        while (!queue.isEmpty()) {
+            Pair now = queue.poll();
+            for (int di=0; di<4; di++) {
+                int nx = now.x + dx[di];
+                int ny = now.y + dy[di];
+                int nd = now.dist + 1;
+                if (nd > 2) continue;
+                if (!canGo(nx, ny)) continue;
+                if (visit[nx][ny]) continue;
+                if (room[nx].charAt(ny) == 'X') continue;
+                if (room[nx].charAt(ny) == 'P') return false;
+                 
+                visit[nx][ny] = true;
+                queue.add(new Pair(nx, ny, nd));
+                
+            }    
         }
-        return 1;
+        return true;
+        
     }
+    static int n, m;
     public int[] solution(String[][] places) {
         int[] answer = new int[5];
-        Arrays.fill(answer, 1);
-        for (int i=0; i<5; i++) {
-            int cnt = 1;
-            for (int j=0; j<5 ; j++) {
-                if (cnt == 0) break;
-                for (int h=0; h<5; h++) {
-                    if (cnt == 0) break;
-                    if (places[i][j].charAt(h) == 'P') {
-                        cnt = BFS(j, h, places[i]);
+        for (int i =0; i<5; i++) {
+            boolean safe = true;
+            visit = new boolean[5][5];
+            for (int r = 0; r< 5; r++) {
+                for (int c = 0; c < 5; c++) {
+                    if (places[i][r].charAt(c) == 'P') {
+                        if (BFS(r, c, places[i])) continue;
+                        safe = false;
                     }
                 }
             }
-            answer[i] = cnt;
+            answer[i] = safe ? 1 : 0;
         }
         return answer;
     }
