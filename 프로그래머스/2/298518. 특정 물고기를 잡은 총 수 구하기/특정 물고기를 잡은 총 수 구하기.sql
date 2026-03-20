@@ -1,0 +1,7 @@
+-- 코드를 작성해주세요 FISH_INFO 테이블에서 잡은 BASS와 SNAPPER의 수를 출력
+
+SELECT COUNT(*) as 'FISH_COUNT'
+FROM FISH_INFO
+JOIN FISH_NAME_INFO
+    ON FISH_INFO.FISH_TYPE = FISH_NAME_INFO.FISH_TYPE
+WHERE FISH_NAME_INFO.FISH_NAME IN ("BASS", "SNAPPER")
