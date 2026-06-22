@@ -1,33 +1,26 @@
 import java.util.*;
-import java.lang.*;
 
 class Solution {
-    static String binary(String a){
-        return Integer.toBinaryString(a.length());
-    }
+    static String binary(String str) {
+        return Integer.toBinaryString(str.length());
+    } 
     public int[] solution(String s) {
-        int oper = 0;
-        int zeroCnt = 0;
-        
-        while (!s.equals("1")){
-            oper++;
+        int[] answer = {};
+        int cnt = 0;
+        int zero = 0;
+        while (!s.equals("1")) {
+            cnt++;
             
-
-            StringBuilder tmp = new StringBuilder();
-            for (int i=0; i<s.length(); i++){
-                if ('0' == s.charAt(i)){
-                    zeroCnt++;
-                } else {
-                    tmp.append('1');
-                }
-            }    
-            s = binary(tmp.toString());
+            StringBuilder sb = new StringBuilder();
+        
+            for (Character c : s.toCharArray()) {
+                if (c == '1') sb.append("1");
+                else zero += 1;
+            }
+            
+            s = binary(sb.toString());
         }
         
-        int[] answer = new int[2];
-        answer[0] = oper;
-        answer[1] = zeroCnt;
-        
-        return answer;
+        return new int[]{cnt, zero};
     }
 }
